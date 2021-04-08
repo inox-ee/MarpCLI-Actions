@@ -1,0 +1,32 @@
+name: MarpCLI-GitHub-Actions
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "contents/**"
+jobs:
+  marp-to-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set input_dir
+        run: |
+          while read line;
+          do
+            echo $line >> $GITHUB_ENV
+          done<./config
+      - name: Create output DIR
+        run: |
+          mkdir ${{env.DST}}
+          chmod 777 -R $_
+      - name: Export PDF
+        run: docker run --rm --init -v "$(pwd):/home/marp/app/"
+          -e LANG="ja_JP.UTF-8" -e MARPID="$(id -u):$(id -g)" marpteam/marp-cli -I ${{env.DIR}}
+          --${{env.FORMAT}}
+          -o ${{env.DST}}
+          --allow-local-files
+      - uses: actions/upload-artifact@v2
+        with:
+          name: output_slide
+          path: ${{env.DST}}
