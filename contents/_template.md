@@ -25,22 +25,22 @@ style: |
 
 <!-- _class: lead -->
 
-# 進捗報告
+# タイトル 1
 
-## 2021 - 04 - 07
+## サブタイトル 1
 
-### ino
+### inox-ee
 
 ---
 
 <!--
 header: 2021-04-07
-footer: ino
+footer: inox-ee
 -->
 
-# 進捗
+# タイトル 2
 
-1. その週の進捗
+1. hogehoge
 
 - タスク１
 - タスク２
