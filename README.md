@@ -1,5 +1,7 @@
 # Template for MarpCLI with GitHub Actions
 
+[![MarpCLI-GitHub-Actions](https://github.com/inox-ee/MarpCLI-Actions/actions/workflows/exportPDF.yml/badge.svg)](https://github.com/inox-ee/MarpCLI-Actions/actions/workflows/exportPDF.yml)
+
 ## What is working ?
 
 - convert markdown to PDF
