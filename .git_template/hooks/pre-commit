@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# set hooksPath
+# ```
+# $ git config --local core.hooksPath '.git_template/hooks/'
+# ```
+
+readonly BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+readonly BRANCH_PREFIX=${BRANCH_NAME%%/*}
+
+printf "...checking branch name:\033[36m$BRANCH_NAME\033[m\n"
+
+if [ "$BRANCH_PREFIX" = "feature" ]; then
+  printf "...This is \033[36mfeature\033[m branch\n"
+  BRANCH_SUFFIX=${BRANCH_NAME#*/}
+  if [[ ! $BRANCH_SUFFIX =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    printf "  \033[0;31m✘\033[m invalid branch name!\n"
+    exit 1
+  fi
+fi
+
+echo "  ✔ OK!"
