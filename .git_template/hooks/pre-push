@@ -14,8 +14,10 @@ if [ "$BRANCH_PREFIX" = "feature" ]; then
   printf "  ✔ This is \033[0;36mfeature\033[m branch.\n"
   readonly $(head -1 config | xargs)
   BRANCH_SUFFIX=${BRANCH_NAME#*/}
-  if [ "$RELEASE_NAME" != "$BRANCH_SUFFIX//-/" ]; then
+  if [ "${RELEASE_NAME//\./}" != "${BRANCH_SUFFIX//-/}" ]; then
     printf '  \033[0;31m✘\033[m \033[0;36mRELEASE_NAME\033[m is not valid.\n'
+    printf "    RELEASE_NAME : ${RELEASE_NAME//\./}\n"
+    printf "    BRANCH_SUFFIX: ${BRANCH_SUFFIX//-/}\n"
     exit 1
   fi
 fi
